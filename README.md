@@ -25,9 +25,11 @@ editor.*
 
 ## Requirements
 
-* PHP ^8.1
-* silverstripe/framework ^5
-* dnadesign/silverstripe-elemental ^5 (optional, only if you want to use the fields inside Elemental blocks)
+* PHP ^8.3
+* silverstripe/framework ^6
+* dnadesign/silverstripe-elemental ^6 (optional, only if you want to use the fields inside Elemental blocks)
+
+For Silverstripe CMS 5, use the `1` branch (`^1`).
 
 ## Installation
 
