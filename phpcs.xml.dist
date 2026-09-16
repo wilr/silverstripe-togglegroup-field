@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="wilr/silverstripe-togglegroup-field">
+    <description>Coding standard for the toggle group field module</description>
+
+    <file>src</file>
+    <file>tests</file>
+
+    <arg value="sp"/>
+    <arg name="colors"/>
+
+    <!-- Global-namespace Page/PageController test stubs required by silverstripe/cms -->
+    <exclude-pattern>tests/php/Page.php</exclude-pattern>
+
+    <rule ref="PSR12"/>
+</ruleset>
