@@ -93,4 +93,19 @@ class ToggleGroupSetFieldTest extends SapphireTest
         $field->setButtonsBlock(false);
         $this->assertStringNotContainsString('toggle-group-field--block', $field->extraClass());
     }
+
+    public function testOptionIconsAreRenderedOnSetField()
+    {
+        $field = $this->getField();
+        $field->setOptionIcons([
+            'mon' => 'calendar',
+            'tue' => '<path d="M5 12h14"/>',
+        ]);
+
+        $html = (string) $field->Field();
+
+        $this->assertStringContainsString('font-icon-calendar', $html);
+        $this->assertStringContainsString('<path d="M5 12h14"/>', $html);
+        $this->assertStringContainsString('toggle-group__icon', $html);
+    }
 }

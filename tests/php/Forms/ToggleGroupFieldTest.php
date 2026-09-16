@@ -111,4 +111,53 @@ class ToggleGroupFieldTest extends SapphireTest
 
         $this->assertTrue($readonlyField->isReadonly());
     }
+
+    public function testOptionFontIconsAreRendered()
+    {
+        $field = $this->getField();
+        $field->setOptionIcons([
+            'left' => 'angle-left',
+            'center' => 'font-icon-dot-3',
+            'right' => 'angle-right',
+        ]);
+
+        $html = (string) $field->Field();
+
+        $this->assertStringContainsString('font-icon-angle-left', $html);
+        $this->assertStringContainsString('font-icon-dot-3', $html);
+        $this->assertStringContainsString('font-icon-angle-right', $html);
+        $this->assertStringContainsString('toggle-group__icon', $html);
+        $this->assertStringContainsString('>Left<', $html);
+    }
+
+    public function testOptionSvgIconsAcceptPathsAndFullMarkup()
+    {
+        $field = $this->getField();
+        $field->setOptionIcons([
+            'left' => '<path d="M4 12h16"/>',
+            'center' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'
+                . '<circle cx="12" cy="12" r="8"/></svg>',
+        ]);
+
+        $html = (string) $field->Field();
+
+        $this->assertStringContainsString('viewBox="0 0 24 24"', $html);
+        $this->assertStringContainsString('<path d="M4 12h16"/>', $html);
+        $this->assertStringContainsString('<circle cx="12" cy="12" r="8"/>', $html);
+        $this->assertStringNotContainsString('font-icon-', $html);
+    }
+
+    public function testIconsOnlyHidesTitlesVisually()
+    {
+        $field = $this->getField();
+        $field->setOptionIcons(['left' => 'angle-left']);
+        $field->setIconsOnly(true);
+
+        $html = (string) $field->Field();
+
+        $this->assertStringContainsString('toggle-group-field--icons-only', $field->extraClass());
+        $this->assertStringContainsString('toggle-group__label--icon-only', $html);
+        $this->assertStringContainsString('toggle-group__title--sr-only', $html);
+        $this->assertStringContainsString('>Left<', $html);
+    }
 }

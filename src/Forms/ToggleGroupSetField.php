@@ -48,6 +48,17 @@ class ToggleGroupSetField extends CheckboxSetField
         $this->setSchemaComponent('FormField');
     }
 
+    public function getOptions()
+    {
+        $options = parent::getOptions();
+
+        foreach ($options as $option) {
+            $this->augmentOptionWithIcon($option);
+        }
+
+        return $options;
+    }
+
     public function getAttributes()
     {
         return array_merge(

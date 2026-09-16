@@ -146,6 +146,70 @@ ToggleGroupField::create(/* ... */)
     ->setButtonsSmall(true); // render a more compact button size
 ```
 
+### Icons on option labels
+
+Both fields can show a Silverstripe CMS font icon and/or custom SVG beside
+(or instead of) each option's text label.
+
+#### CMS font icons
+
+Use the same icon identifiers as `FormAction::setIcon()` (with or without
+the `font-icon-` prefix). Browse the available glyphs in
+`vendor/silverstripe/admin/client/src/font/icons-reference.html` after
+installing `silverstripe/admin`.
+
+```php
+ToggleGroupField::create(
+    'Alignment',
+    'Alignment',
+    [
+        'left' => 'Left',
+        'center' => 'Center',
+        'right' => 'Right',
+    ]
+)->setOptionIcons([
+    'left' => 'angle-left',
+    'center' => 'dot-3',
+    'right' => 'angle-right',
+]);
+```
+
+#### Custom SVG
+
+Pass a full `<svg>...</svg>` element, or one or more shape elements such as
+`<path>` (automatically wrapped in a 24×24 `viewBox` SVG that inherits the
+button colour via `currentColor`). SVG is rendered as trusted HTML - only
+pass markup you control.
+
+```php
+ToggleGroupField::create(
+    'Layout',
+    'Layout',
+    [
+        'list' => 'List',
+        'grid' => 'Grid',
+    ]
+)->setOptionIcons([
+    'list' => '<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" fill="none"/>',
+    'grid' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>',
+]);
+```
+
+#### Icon-only buttons
+
+Hide the text visually while keeping it available to screen readers through
+the associated `<label>`:
+
+```php
+ToggleGroupField::create(/* ... */)
+    ->setOptionIcons([
+        'left' => 'angle-left',
+        'center' => 'dot-3',
+        'right' => 'angle-right',
+    ])
+    ->setIconsOnly(true);
+```
+
 ## Accessibility
 
 Each option is rendered as a real `<input type="radio">` or

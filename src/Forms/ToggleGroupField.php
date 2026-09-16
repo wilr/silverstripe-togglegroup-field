@@ -47,6 +47,11 @@ class ToggleGroupField extends OptionsetField
         $this->setSchemaComponent('FormField');
     }
 
+    protected function getFieldOption($value, $title, $odd)
+    {
+        return $this->augmentOptionWithIcon(parent::getFieldOption($value, $title, $odd));
+    }
+
     public function getAttributes()
     {
         return array_merge(

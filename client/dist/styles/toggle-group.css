@@ -81,12 +81,67 @@ ul.toggle-group-field {
     opacity: 0.5;
 }
 
+.toggle-group-field .toggle-group__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.toggle-group-field .toggle-group__icon:before {
+    /* Optical alignment for the CMS silverstripe icon font glyphs */
+    display: block;
+}
+
+.toggle-group-field .toggle-group__icon svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+.toggle-group-field .toggle-group__icon + .toggle-group__title:not(.toggle-group__title--sr-only) {
+    margin-left: 0.4em;
+}
+
+.toggle-group-field .toggle-group__title--sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+ul.toggle-group-field.toggle-group-field--icons-only .toggle-group__label,
+.toggle-group-field .toggle-group__label--icon-only {
+    width: 2.25rem;
+    min-width: 2.25rem;
+    padding: 0;
+}
+
 /* Small variant, e.g. for use inside a FieldGroup */
 ul.toggle-group-field.toggle-group-field--small .toggle-group__label {
     height: 1.875rem;
     min-width: 1.875rem;
     padding: 0 0.5rem;
     font-size: 12px;
+}
+
+ul.toggle-group-field.toggle-group-field--small .toggle-group__icon {
+    font-size: 14px;
+}
+
+ul.toggle-group-field.toggle-group-field--small.toggle-group-field--icons-only .toggle-group__label,
+ul.toggle-group-field.toggle-group-field--small .toggle-group__label--icon-only {
+    width: 1.875rem;
+    min-width: 1.875rem;
+    padding: 0;
 }
 
 /* Full width variant, each option grows to share the available space evenly */
