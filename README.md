@@ -131,12 +131,12 @@ class MyElement extends BaseElement
 
 Elemental's block editor is a schema-driven, React-rendered form (unlike a
 classic `Page.getCMSFields()`, which is rendered server-side as plain HTML).
-`OptionsetField` and `CheckboxSetField` normally declare a dedicated React
-component for that context, which would bypass this module's template
-entirely. Both fields here explicitly fall back to the generic `FormField`
-schema component instead, so the same server-rendered markup - and therefore
-the same styling and behaviour - is used everywhere, including inline and in
-the "add block" modal.
+For that context the module registers `ToggleGroupField` and
+`ToggleGroupSetField` React components (`client/dist/js/toggle-group-react.js`,
+loaded in the CMS via `LeftAndMain.extra_requirements_javascript`). They
+render the same markup as the templates, so styling and icons are identical,
+and are bound to the form state so values save inline and in the "add block"
+modal.
 
 ### Style variants
 

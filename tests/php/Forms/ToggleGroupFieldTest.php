@@ -39,14 +39,18 @@ class ToggleGroupFieldTest extends SapphireTest
         $this->assertSame('radiogroup', $attributes['role']);
     }
 
-    public function testSchemaComponentFallsBackToServerRenderedMarkup()
+    public function testSchemaUsesToggleGroupComponentWithIcons()
     {
-        // OptionsetField declares its own React component, which would
-        // otherwise be used instead of our template inside schema-driven
-        // forms (e.g. Elemental's GridField-based block editor).
-        $field = $this->getField();
+        $field = $this->getField()
+            ->setOptionIcons(['left' => 'font-icon-left-dir', 'right' => '<path d="M0 0"/>'])
+            ->setIconsOnly();
 
-        $this->assertSame('FormField', $field->getSchemaComponent());
+        $schema = $field->getSchemaDataDefaults();
+
+        $this->assertSame('ToggleGroupField', $schema['component']);
+        $this->assertTrue($schema['data']['iconsOnly']);
+        $this->assertSame(['font' => 'left-dir'], $schema['data']['icons']->left);
+        $this->assertStringStartsWith('<svg', $schema['data']['icons']->right['svg']);
     }
 
     public function testFieldRendersARadioInputPerOption()

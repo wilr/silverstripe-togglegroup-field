@@ -39,14 +39,11 @@ class ToggleGroupSetFieldTest extends SapphireTest
         $this->assertSame('group', $attributes['role']);
     }
 
-    public function testSchemaComponentFallsBackToServerRenderedMarkup()
+    public function testSchemaUsesToggleGroupSetComponent()
     {
-        // CheckboxSetField declares its own React component, which would
-        // otherwise be used instead of our template inside schema-driven
-        // forms (e.g. Elemental's GridField-based block editor).
         $field = $this->getField();
 
-        $this->assertSame('FormField', $field->getSchemaComponent());
+        $this->assertSame('ToggleGroupSetField', $field->getSchemaComponent());
     }
 
     public function testFieldRendersACheckboxInputPerOption()

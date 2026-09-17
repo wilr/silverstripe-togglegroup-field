@@ -1,3 +1,8 @@
 ---
 Name: wilr-togglegroup-field
 ---
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - 'wilr/silverstripe-togglegroup-field:client/dist/js/toggle-group-react.js'
+  extra_requirements_css:
+    - 'wilr/silverstripe-togglegroup-field:client/dist/styles/toggle-group.css'

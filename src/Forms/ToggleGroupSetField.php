@@ -39,13 +39,9 @@ class ToggleGroupSetField extends CheckboxSetField
         $this->addExtraClass('toggle-group-field');
         $this->requireToggleGroupAssets();
 
-        // CheckboxSetField declares a dedicated React component for
-        // rendering inside schema-driven forms (e.g. Elemental's
-        // GridField-based block editor), which would otherwise bypass our
-        // template entirely. Falling back to the generic component makes
-        // those contexts use our server-rendered markup, same as a classic
-        // Page.getCMSFields().
-        $this->setSchemaComponent('FormField');
+        // Schema-driven forms (e.g. Elemental's inline block editor) render
+        // this component, registered in client/dist/js/toggle-group-react.js.
+        $this->setSchemaComponent('ToggleGroupSetField');
     }
 
     public function getOptions()

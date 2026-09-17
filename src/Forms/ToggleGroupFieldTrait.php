@@ -122,6 +122,32 @@ trait ToggleGroupFieldTrait
     }
 
     /**
+     * Pass icons through to the React component used in schema-driven forms.
+     */
+    public function getSchemaDataDefaults()
+    {
+        $data = parent::getSchemaDataDefaults();
+        $icons = [];
+
+        foreach (array_keys($this->getOptionIcons()) as $value) {
+            $icon = $this->getOptionIconForValue($value);
+
+            if ($icon === null) {
+                continue;
+            }
+
+            $icons[(string) $value] = $this->isSvgIcon($icon)
+                ? ['svg' => $this->normaliseSvgIcon($icon)]
+                : ['font' => $this->normaliseFontIconName($icon)];
+        }
+
+        $data['data']['icons'] = (object) $icons;
+        $data['data']['iconsOnly'] = $this->getIconsOnly();
+
+        return $data;
+    }
+
+    /**
      * Merge icon template fields onto an option ArrayData produced by the
      * parent OptionsetField / CheckboxSetField.
      */
